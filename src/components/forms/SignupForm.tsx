@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { registerUserAction } from "@/app/data/actions/auth-actions";
+import { registerUserAction } from "@/app/data/actions/registerUserAction";
 import { useFormState } from "react-dom";
 
 import {
@@ -16,21 +16,34 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import ZodErrors from "@/components/custom/ZodErrors";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { register } from "@/lib/api";
 
 const INITIAL_STATE = {
   data: null,
 };
 
 const SignupForm = () => {
-  const [formState, formAction] = useFormState(
-    registerUserAction,
-    INITIAL_STATE
-  );
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-  console.log(formState);
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      await register(username, email, password);
+      router.push("/signin");
+    } catch (err) {
+      setError("Failed to create account");
+    }
+  };
+
   return (
     <div className="w-full max-w-md">
-      <form action={formAction}>
+      <form onSubmit={handleSubmit}>
         <Card>
           <CardHeader className="space-y-1">
             <CardTitle className="text-3xl font-bold">Sign Up</CardTitle>
@@ -39,6 +52,7 @@ const SignupForm = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
+            {error && <div className="text-red-500">{error}</div>}
             <div className="space-y-2">
               <Label htmlFor="username">Username</Label>
               <Input
@@ -46,8 +60,8 @@ const SignupForm = () => {
                 name="username"
                 type="text"
                 placeholder="username"
+                onChange={(e) => setUsername(e.target.value)}
               />
-              <ZodErrors error={formState?.zodErrors?.username} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -56,8 +70,8 @@ const SignupForm = () => {
                 name="email"
                 type="email"
                 placeholder="name@example.com"
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <ZodErrors error={formState?.zodErrors?.username} />
             </div>
 
             <div className="space-y-2">
@@ -67,8 +81,8 @@ const SignupForm = () => {
                 name="password"
                 type="password"
                 placeholder="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <ZodErrors error={formState?.zodErrors?.password} />
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
@@ -80,7 +94,7 @@ const SignupForm = () => {
         <div className="mt-4 text-center text-sm">
           Have an account?
           <Link className="underline ml-2" href="signin">
-            Sing In
+            Sign In
           </Link>
         </div>
       </form>
