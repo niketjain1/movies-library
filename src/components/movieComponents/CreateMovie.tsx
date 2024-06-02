@@ -16,6 +16,7 @@ const CreateMovieList = ({ className }: CreateMovieListType) => {
       const token = localStorage.getItem("token") as string;
       const userId = parseInt(localStorage.getItem("user") as string);
       await createMovieList(name, isPublic, token, userId);
+      setName("");
     } catch (error) {
       console.error("Error creating movie list:", error);
     }

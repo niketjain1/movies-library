@@ -36,11 +36,12 @@ export const searchMovies = async (title: string) => {
 export const createMovieList = async (
   name: string,
   isPublic: boolean,
-  token: string
+  token: string,
+  userId: number
 ) => {
   const response = await api.post(
-    "/movie-lists",
-    { name, isPublic },
+    "/list/create",
+    { userId, name, isPublic },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -50,8 +51,8 @@ export const createMovieList = async (
   return response.data;
 };
 
-export const getMovieLists = async (token: string) => {
-  const response = await api.get("/movie-lists", {
+export const getMovieLists = async (userId: number, token: string) => {
+  const response = await api.get("/list", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
