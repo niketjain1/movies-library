@@ -1,4 +1,5 @@
 import React from "react";
+import AddMovieToList from "../movieComponents/AddMovieToList";
 
 interface MovieCardProps {
   poster: string;
@@ -6,9 +7,17 @@ interface MovieCardProps {
   year: string;
   director: string;
   plot: string;
+  imdbId: string;
 }
 
-const MovieCard = ({ poster, title, year, director, plot }: MovieCardProps) => {
+const MovieCard = ({
+  poster,
+  title,
+  year,
+  director,
+  plot,
+  imdbId,
+}: MovieCardProps) => {
   return (
     <div className="m-4 mb-8 w-64 px-4">
       <div className="rounded-lg bg-white shadow-lg">
@@ -17,12 +26,7 @@ const MovieCard = ({ poster, title, year, director, plot }: MovieCardProps) => {
           <h2 className="mb-2 text-lg font-semibold">{title}</h2>
           <p className="mb-2 text-sm text-gray-700">Release year: {year}</p>
           <p className="mb-4 text-sm text-gray-700">Director: {director}</p>
-          <a
-            href="#"
-            className="block rounded-lg bg-blue-500 px-4 py-2 text-center font-semibold text-white hover:bg-blue-600"
-          >
-            Add Movie
-          </a>
+          <AddMovieToList imdbID={imdbId} onSuccess={() => {}} />
         </div>
       </div>
     </div>
