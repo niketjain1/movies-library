@@ -66,7 +66,7 @@ export const addMovieToList = async (
   token: string
 ) => {
   const response = await api.post(
-    `/movie-lists/${listId}/movies`,
+    `/list/${listId}/movies`,
     { imdbID },
     {
       headers: {
