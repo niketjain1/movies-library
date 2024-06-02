@@ -57,6 +57,7 @@ const SearchMovies: React.FC = () => {
             plot={movie.plot}
             poster={movie.poster}
             year={movie.year}
+            imdbId={movie.imdbID}
           />
         )}
       </div>

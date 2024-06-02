@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { getMovieLists } from "../lib/api";
 import SearchMovies from "../components/movieComponents/SearchMovie";
 import CreateMovieList from "../components/movieComponents/CreateMovie";
+import MovieListCard from "@/components/card/MovieListCard";
 
 const Home: React.FC = () => {
   const [lists, setLists] = useState<any[]>([]);
@@ -19,7 +20,8 @@ const Home: React.FC = () => {
           return;
         }
 
-        const data = await getMovieLists(token);
+        const userId = parseInt(localStorage.getItem("userId") as string);
+        const data = await getMovieLists(userId, token);
         setLists(data);
       } catch (error) {
         console.error("Error fetching movie lists:", error);
@@ -38,10 +40,10 @@ const Home: React.FC = () => {
           <h2 className="text-2xl font-bold">Your Lists</h2>
           <div className="mt-4">
             {lists.map((list) => (
-              <div key={list.id} className="border rounded p-4 mb-4">
-                <h3 className="text-xl font-bold">{list.name}</h3>
-                <p>{list.isPublic ? "Public" : "Private"}</p>
-              </div>
+              <MovieListCard
+                listTitle={list.name}
+                isPublic={list.isPublic ? "Public" : "Private"}
+              />
             ))}
           </div>
         </div>
