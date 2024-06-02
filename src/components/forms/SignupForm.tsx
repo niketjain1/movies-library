@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { registerUserAction } from "@/app/data/actions/registerUserAction";
-import { useFormState } from "react-dom";
 
 import {
   CardTitle,
@@ -19,10 +17,7 @@ import ZodErrors from "@/components/custom/ZodErrors";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { register } from "@/lib/api";
-
-const INITIAL_STATE = {
-  data: null,
-};
+import CustomButton from "../button/CustomButton";
 
 const SignupForm = () => {
   const [username, setUsername] = useState("");
@@ -86,9 +81,7 @@ const SignupForm = () => {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <button type="submit" className="w-full">
-              Sign Up
-            </button>
+            <CustomButton title={"Sign Up"} />
           </CardFooter>
         </Card>
         <div className="mt-4 text-center text-sm">

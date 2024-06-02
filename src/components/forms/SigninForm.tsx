@@ -13,15 +13,16 @@ import {
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { useFormState } from "react-dom";
-import { loginUserAction } from "@/app/data/actions/loginUserAction";
 import { login } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import CustomButton from "../button/CustomButton";
 
-const INITIAL_STATE = {
-  data: null,
-};
+interface ResponseData {
+  token: string;
+  email: string;
+  userName: string;
+}
 
 const SigninForm = () => {
   const [email, setEmail] = useState("");
@@ -32,11 +33,16 @@ const SigninForm = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const data = await login(email, password);
+      const data: ResponseData = await login(email, password);
       localStorage.setItem("token", data.token);
+      const user = {
+        userName: data.userName,
+        email: data.email,
+      };
+      localStorage.setItem("user", JSON.stringify(user));
       router.push("/");
     } catch (err) {
-      setError("Invalid username or password");
+      setError("Invalid email or password");
     }
   };
 
@@ -74,7 +80,7 @@ const SigninForm = () => {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <button className="w-full">Sign In</button>
+            <CustomButton title={"Sign In"} />
           </CardFooter>
         </Card>
         <div className="mt-4 text-center text-sm">
