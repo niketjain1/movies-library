@@ -22,6 +22,7 @@ interface ResponseData {
   token: string;
   email: string;
   userName: string;
+  userId: number;
 }
 
 const SigninForm = () => {
@@ -38,8 +39,10 @@ const SigninForm = () => {
       const user = {
         userName: data.userName,
         email: data.email,
+        userId: data.userId,
       };
       localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("userId", JSON.stringify(user.userId));
       router.push("/");
     } catch (err) {
       setError("Invalid email or password");
