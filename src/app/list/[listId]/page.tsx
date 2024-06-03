@@ -39,6 +39,7 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
             poster={movie.poster}
             year={movie.year}
             imdbId={movie.imdbID}
+            rating={movie.imdbRating}
           />
         ))}
       </div>

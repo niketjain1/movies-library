@@ -6,8 +6,10 @@ export interface MovieCardProps {
   title: string;
   year: string;
   director: string;
-  plot: string;
-  imdbId: string;
+  plot?: string;
+  imdbId?: string;
+  rating: string;
+  onSucces?: () => void;
 }
 
 const MovieCard = ({
@@ -17,6 +19,8 @@ const MovieCard = ({
   director,
   plot,
   imdbId,
+  onSucces,
+  rating,
 }: MovieCardProps) => {
   return (
     <div className="m-4 mb-8 w-64 px-4">
@@ -26,7 +30,8 @@ const MovieCard = ({
           <h2 className="mb-2 text-lg font-semibold">{title}</h2>
           <p className="mb-2 text-sm text-gray-700">Release year: {year}</p>
           <p className="mb-4 text-sm text-gray-700">Director: {director}</p>
-          <AddMovieToList imdbID={imdbId} onSuccess={() => {}} />
+          <p className="mb-4 text-sm text-gray-700">Rating: {rating}</p>
+          <AddMovieToList imdbID={imdbId ?? ""} onSuccess={onSucces as any} />
         </div>
       </div>
     </div>

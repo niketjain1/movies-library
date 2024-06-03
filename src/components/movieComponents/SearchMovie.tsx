@@ -3,6 +3,8 @@
 import { searchMovies } from "@/lib/api";
 import React, { useState } from "react";
 import MovieCard from "../card/MovieCard";
+import { ToastContainer, toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css";
 
 export type MovieResult = {
   director: string;
@@ -18,7 +20,7 @@ export type MovieResult = {
 
 const SearchMovies: React.FC = () => {
   const [query, setQuery] = useState("");
-  const [movie, setMovie] = useState<MovieResult>();
+  const [movie, setMovie] = useState<MovieResult | null>();
 
   const handleSearch = async () => {
     try {
@@ -27,6 +29,14 @@ const SearchMovies: React.FC = () => {
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
+  };
+
+  const movieAddedSuccess = () => {
+    setMovie(null);
+    setQuery("");
+    toast.success("Movie added to the list successfully!", {
+      position: "bottom-center",
+    });
   };
 
   return (
@@ -47,7 +57,7 @@ const SearchMovies: React.FC = () => {
         </button>
       </div>
       <div className="mt-4">
-        {movie && (
+        {movie != null && (
           <MovieCard
             title={movie.title}
             director={movie.director}
@@ -55,6 +65,8 @@ const SearchMovies: React.FC = () => {
             poster={movie.poster}
             year={movie.year}
             imdbId={movie.imdbID}
+            rating={movie.imdbRating}
+            onSucces={movieAddedSuccess}
           />
         )}
       </div>
