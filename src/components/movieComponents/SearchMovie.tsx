@@ -23,7 +23,6 @@ const SearchMovies: React.FC = () => {
   const handleSearch = async () => {
     try {
       const data = await searchMovies(query);
-      console.log(data);
       setMovie(data);
     } catch (error) {
       console.error("Error fetching movies:", error);

@@ -19,9 +19,7 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
 
   const fetchListDetailsData = async () => {
     try {
-      console.log({ listId });
       const list = await fetchListDetails(parseInt(listId));
-      console.log({ list });
       setMovies(list.movies);
       setListTitle(list.name);
     } catch (error) {
