@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const MovieListCard = ({
+const ListCard = ({
   listTitle,
   isPublic,
   listId,
@@ -24,4 +24,4 @@ const MovieListCard = ({
   );
 };
 
-export default MovieListCard;
+export default ListCard;
