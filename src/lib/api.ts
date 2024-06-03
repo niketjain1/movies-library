@@ -52,7 +52,7 @@ export const createMovieList = async (
 };
 
 export const getMovieLists = async (userId: number, token: string) => {
-  const response = await api.get(`/list/${userId}`, {
+  const response = await api.get(`/list/${userId}/user`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -77,8 +77,8 @@ export const addMovieToList = async (
   return response.data;
 };
 
-export const fetchListDetails = async (id: number) => {
-  const response = await api.get(`/list/${id}`);
+export const fetchListDetails = async (listId: number) => {
+  const response = await api.get(`/list/${listId}`);
   return response.data;
 };
 
