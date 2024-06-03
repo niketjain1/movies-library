@@ -28,6 +28,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logout = () => {
     router.push("/signin");
+    localStorage.removeItem("userName");
     setUserName(null);
   };
 
