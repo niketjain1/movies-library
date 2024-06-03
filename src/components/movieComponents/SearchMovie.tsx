@@ -4,7 +4,7 @@ import { searchMovies } from "@/lib/api";
 import React, { useState } from "react";
 import MovieCard from "../card/MovieCard";
 
-type MovieResult = {
+export type MovieResult = {
   director: string;
   genre: string[];
   id: number;
@@ -29,8 +29,6 @@ const SearchMovies: React.FC = () => {
       console.error("Error fetching movies:", error);
     }
   };
-
-  console.log({ movie });
 
   return (
     <div className="p-4">

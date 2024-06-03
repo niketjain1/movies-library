@@ -1,7 +1,7 @@
 import React from "react";
 import AddMovieToList from "../movieComponents/AddMovieToList";
 
-interface MovieCardProps {
+export interface MovieCardProps {
   poster: string;
   title: string;
   year: string;
