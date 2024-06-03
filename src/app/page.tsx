@@ -41,8 +41,10 @@ const Home: React.FC = () => {
           <div className="mt-4">
             {lists.map((list) => (
               <MovieListCard
+                key={list.id}
                 listTitle={list.name}
                 isPublic={list.isPublic ? "Public" : "Private"}
+                listId={list.id}
               />
             ))}
           </div>

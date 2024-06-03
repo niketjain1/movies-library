@@ -77,4 +77,9 @@ export const addMovieToList = async (
   return response.data;
 };
 
+export const fetchListDetails = async (id: number) => {
+  const response = await api.get(`/list/${id}`);
+  return response.data;
+};
+
 export default api;
