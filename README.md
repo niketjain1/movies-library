@@ -15,15 +15,15 @@ This is a web application for managing movie lists. Users can create and view th
 ### Technologies Used
 
 - Frontend:
+
   - React.js
   - Next.js
   - Tailwind CSS
 
-### Backend:
-
-- Node.js
-- Nest.js
-- PostgresSQL
+- Backend:
+  - Node.js
+  - Nest.js
+  - PostgresSQL
 
 ### Getting Started
 
@@ -51,6 +51,8 @@ $ npm install
 ```bash
 $ npm run dev
 ```
+
 #### To test on prod -
-Frontend host link- 
+
+Frontend host link-
 Backend host link- https://movies-library-backend-l2x6.onrender.com
