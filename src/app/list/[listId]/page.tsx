@@ -45,8 +45,8 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
   }
 
   return (
-    <div>
-      <h1 className="p-2 mt-16 text-3xl font-bold text-center">{listTitle}</h1>
+    <div className="max-h-screen overflow-auto w-full">
+      <h1 className="pt-8 mt-16 text-3xl font-bold text-center">{listTitle}</h1>
       <div className="container mx-auto p-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {movies.map((movie) => (
