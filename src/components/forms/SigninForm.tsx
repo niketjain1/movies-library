@@ -48,7 +48,7 @@ const SigninForm = () => {
       toast.success("User signed in successfully!", {
         position: "bottom-center",
       });
-      router.push("/");
+      router.push("/home");
     } catch (err) {
       setError("Invalid email or password");
     }
