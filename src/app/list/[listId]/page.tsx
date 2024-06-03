@@ -44,6 +44,14 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
     );
   }
 
+  if (movies.length == 0) {
+    return (
+      <div className="flex w-screen justify-center items-center h-screen">
+        <p className="text-2xl font-bold text-white">No movies in this list</p>
+      </div>
+    );
+  }
+
   return (
     <div className="max-h-screen overflow-auto w-full">
       <h1 className="pt-8 mt-16 text-3xl font-bold text-center">{listTitle}</h1>

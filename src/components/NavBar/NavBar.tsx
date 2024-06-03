@@ -28,9 +28,9 @@ const NavBar = () => {
   };
 
   return (
-    <div className="flex flex-row w-full p-4 items-center justify-center bg-gray-400 absolute">
-      <RiMovie2Line size={24} />
-      <p className="mx-3">Movie library</p>
+    <div className="flex flex-row w-full p-3 items-center justify-center bg-gray-800 absolute">
+      <RiMovie2Line size={24} className="text-white" />
+      <p className="mx-3 text-white">Movies library</p>
       <Link href={"/"} className="ml-auto">
         <CustomButton title={"Home"} />
       </Link>
