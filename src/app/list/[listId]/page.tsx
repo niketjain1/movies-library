@@ -67,6 +67,7 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
               imdbId={movie.imdbID}
               rating={movie.imdbRating}
               disableAddToList={true}
+              key={movie.id}
             />
           ))}
         </div>
