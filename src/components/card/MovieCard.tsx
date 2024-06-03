@@ -10,6 +10,7 @@ export interface MovieCardProps {
   imdbId?: string;
   rating: string;
   onSucces?: () => void;
+  disableAddToList?: boolean;
 }
 
 const MovieCard = ({
@@ -21,6 +22,7 @@ const MovieCard = ({
   imdbId,
   onSucces,
   rating,
+  disableAddToList,
 }: MovieCardProps) => {
   return (
     <div className="m-4 mb-8 w-80 px-4">
@@ -32,7 +34,9 @@ const MovieCard = ({
           <p className="mb-1 text-sm text-gray-700">Director: {director}</p>
           <p className="mb-1 text-sm text-gray-700">Rating: {rating}</p>
           {/* <p className="mb-1 text-sm text-gray-700">Plot: {plot}</p> */}
-          <AddMovieToList imdbID={imdbId ?? ""} onSuccess={onSucces as any} />
+          {!disableAddToList && (
+            <AddMovieToList imdbID={imdbId ?? ""} onSuccess={onSucces as any} />
+          )}
         </div>
       </div>
     </div>

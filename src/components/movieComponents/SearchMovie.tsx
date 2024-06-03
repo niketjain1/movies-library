@@ -33,9 +33,12 @@ const SearchMovies: React.FC = () => {
       setMovie(data);
     } catch (error) {
       console.error("Error fetching movies:", error);
-      toast.error("Movie not found!", {
-        position: "bottom-center",
-      });
+      toast.error(
+        "Movie not found, please check the name again, make sure it follows the casing",
+        {
+          position: "bottom-center",
+        }
+      );
     }
   };
 
