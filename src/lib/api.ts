@@ -62,12 +62,12 @@ export const getMovieLists = async (userId: number, token: string) => {
 
 export const addMovieToList = async (
   listId: string,
-  imdbID: string,
+  imdbId: string,
   token: string
 ) => {
   const response = await api.post(
     `/list/${listId}/movies`,
-    { imdbID },
+    { imdbId },
     {
       headers: {
         Authorization: `Bearer ${token}`,

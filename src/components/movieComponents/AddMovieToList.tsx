@@ -13,7 +13,7 @@ const AddMovieToList: React.FC<AddMovieToListProps> = ({
   onSuccess,
 }) => {
   const [lists, setLists] = useState<any[]>([]);
-  const [selectedList, setSelectedList] = useState("");
+  const [selectedListId, setSelectedListId] = useState("");
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -33,7 +33,7 @@ const AddMovieToList: React.FC<AddMovieToListProps> = ({
   const handleAddMovie = async () => {
     try {
       const token = localStorage.getItem("token") as string;
-      await addMovieToList(selectedList, imdbID, token);
+      await addMovieToList(selectedListId, imdbID, token);
       onSuccess();
     } catch (error) {
       console.error("Error adding movie to list:", error);
@@ -43,8 +43,8 @@ const AddMovieToList: React.FC<AddMovieToListProps> = ({
   return (
     <div className="mt-4 flex flex-col items-center">
       <select
-        value={selectedList}
-        onChange={(e) => setSelectedList(e.target.value)}
+        value={selectedListId}
+        onChange={(e) => setSelectedListId(e.target.value)}
         className="border-2 border-gray-400 rounded p-2"
       >
         <option value="" disabled>
