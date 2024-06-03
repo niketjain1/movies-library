@@ -62,4 +62,5 @@ Backend host link- https://movies-library-backend-l2x6.onrender.com
 2. If you haven't created any list, create from the left side panel.
 3. Search for any movie in the search box.
 4. Select the list from the drop down option in which you want to add the movie in.
-5. Click on Add Movie
+5. Click on Add to list button
+6. Click on any list on the side panel to redirect to the list page
