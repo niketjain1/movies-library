@@ -33,7 +33,7 @@ const CreateMovieList = ({ className, onListCreated }: CreateMovieListType) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="List name"
-          className="border rounded p-2 w-full"
+          className="border rounded p-2 w-full border-gray-500"
           required
         />
       </div>
