@@ -32,8 +32,8 @@ const Home: React.FC = () => {
   }, [router]);
 
   return (
-    <div className="flex h-screen w-full mt-11 overflow-auto">
-      <div className="w-1/4 bg-gray-100 p-4 mt-4">
+    <div className="flex h-screen w-full pt-11 overflow-auto">
+      <div className="w-1/4 bg-gray-100 p-4 mt-4 max-h-screen overflow-auto">
         <h1 className="text-3xl font-bold mb-4">Movie Lists</h1>
         <CreateMovieList />
         <div className="mt-8">
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
       </div>
 
       <div className="w-3/4 p-4">
-        <h1 className="text-3xl font-bold mb-4 mt-8">Search Movies</h1>
+        <h1 className="text-3xl font-bold mb-4 pt-8">Search Movies</h1>
         <SearchMovies />
       </div>
     </div>
