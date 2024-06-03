@@ -20,6 +20,7 @@ export type MovieResult = {
 const SearchMovies: React.FC = () => {
   const [query, setQuery] = useState("");
   const [movie, setMovie] = useState<MovieResult | null>();
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
     try {
@@ -29,6 +30,7 @@ const SearchMovies: React.FC = () => {
         });
         return;
       }
+      setLoading(true);
       const data = await searchMovies(query);
       setMovie(data);
     } catch (error) {
@@ -39,6 +41,8 @@ const SearchMovies: React.FC = () => {
           position: "bottom-center",
         }
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,9 +71,12 @@ const SearchMovies: React.FC = () => {
         />
         <button
           onClick={handleSearch}
-          className="bg-blue-500 text-white p-2 rounded"
+          className={`${
+            loading ? "loader" : "bg-blue-500 text-white p-2 rounded"
+          }`}
+          disabled={loading}
         >
-          Search
+          {loading ? "" : "Search"}
         </button>
         <button
           onClick={clearQuery}
