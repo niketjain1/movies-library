@@ -77,7 +77,7 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-3/4 p-4">
+      <div className="w-3/4 p-4 max-h-screen overflow-auto">
         <h1 className="text-3xl font-bold mb-4 pt-8">Search Movies</h1>
         <SearchMovies />
       </div>
