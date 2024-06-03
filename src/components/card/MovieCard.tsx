@@ -1,5 +1,6 @@
 import React from "react";
 import AddMovieToList from "../movieComponents/AddMovieToList";
+import Image from "next/image";
 
 export interface MovieCardProps {
   poster: string;
@@ -27,7 +28,7 @@ const MovieCard = ({
   return (
     <div className="m-4 mb-8 w-80 px-4">
       <div className="rounded-lg bg-white shadow-lg">
-        <img src={poster} alt={title} className="w-full rounded-t-lg" />
+        <Image src={poster} alt={title} className="w-full rounded-t-lg" />
         <div className="p-4">
           <h2 className="mb-1 text-lg font-semibold">{title}</h2>
           <p className="mb-1 text-sm text-gray-700">Release year: {year}</p>
