@@ -10,18 +10,22 @@ interface CreateMovieListType {
 const CreateMovieList = ({ className, onListCreated }: CreateMovieListType) => {
   const [name, setName] = useState("");
   const [isPublic, setIsPublic] = useState(false);
+  const [loading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token") as string;
       const userId = parseInt(localStorage.getItem("userId") as string);
+      setIsLoading(true);
       await createMovieList(name, isPublic, token, userId);
       setName("");
       setIsPublic(false);
       onListCreated();
     } catch (error) {
       console.error("Error creating movie list:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -46,12 +50,18 @@ const CreateMovieList = ({ className, onListCreated }: CreateMovieListType) => {
         />
         <label>Public</label>
       </div>
-      <button
-        type="submit"
-        className="bg-blue-500 text-white p-2 rounded w-full"
-      >
-        Create List
-      </button>
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <div className="loader" />
+        </div>
+      ) : (
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded w-full"
+        >
+          Create List
+        </button>
+      )}
     </form>
   );
 };
