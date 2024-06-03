@@ -17,6 +17,7 @@ import { login } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CustomButton from "../button/CustomButton";
+import { toast } from "react-toastify";
 
 interface ResponseData {
   token: string;
@@ -41,8 +42,12 @@ const SigninForm = () => {
         email: data.email,
         userId: data.userId,
       };
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("userName", JSON.stringify(user.userName));
+      localStorage.setItem("email", JSON.stringify(user.email));
       localStorage.setItem("userId", JSON.stringify(user.userId));
+      toast.success("User signed in successfully!", {
+        position: "bottom-center",
+      });
       router.push("/");
     } catch (err) {
       setError("Invalid email or password");

@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { register } from "@/lib/api";
 import CustomButton from "../button/CustomButton";
+import { toast } from "react-toastify";
 
 const SignupForm = () => {
   const [username, setUsername] = useState("");
@@ -31,6 +32,9 @@ const SignupForm = () => {
     try {
       await register(username, email, password);
       router.push("/signin");
+      toast.success("User registered successfully!", {
+        position: "bottom-center",
+      });
     } catch (err) {
       setError("Failed to create account");
     }
