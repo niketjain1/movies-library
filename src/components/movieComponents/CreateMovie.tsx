@@ -15,7 +15,7 @@ const CreateMovieList = ({ className, onListCreated }: CreateMovieListType) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token") as string;
-      const userId = parseInt(localStorage.getItem("user") as string);
+      const userId = parseInt(localStorage.getItem("userId") as string);
       await createMovieList(name, isPublic, token, userId);
       setName("");
       setIsPublic(false);

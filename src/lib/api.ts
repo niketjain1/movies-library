@@ -52,7 +52,7 @@ export const createMovieList = async (
 };
 
 export const getMovieLists = async (userId: number, token: string) => {
-  const response = await api.get("/list", {
+  const response = await api.get(`/list/${userId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
