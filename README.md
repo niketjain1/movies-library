@@ -54,5 +54,12 @@ $ npm run dev
 
 #### To test on prod -
 
-Frontend host link-
+Frontend host link- https://movies-library-puce.vercel.app/
 Backend host link- https://movies-library-backend-l2x6.onrender.com
+
+### Steps to add movies in the list
+1. Sign into to your account using your email and password.
+2. If you haven't created any list, create from the left side panel.
+3. Search for any movie in the search box.
+4. Select the list from the drop down option in which you want to add the movie in.
+5. Click on Add Movie
