@@ -6,26 +6,10 @@ import CustomButton from "../button/CustomButton";
 import Link from "next/link";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/context/AuthContext";
 
 const NavBar = () => {
-  const [userName, setUserName] = useState<string | null>(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    const storedUserName = localStorage.getItem("userName") as string;
-    if (storedUserName) {
-      setUserName(storedUserName);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("userName");
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("email");
-    setUserName(null);
-    router.push("/signin");
-  };
+  const { userName, isAuthenticated, logout } = useAuth();
 
   return (
     <div className="flex flex-row w-full p-3 items-center justify-center bg-gray-800 absolute">
@@ -34,13 +18,13 @@ const NavBar = () => {
       <Link href={"/home"} className="ml-auto">
         <CustomButton title={"Home"} />
       </Link>
-      {userName ? (
+      {isAuthenticated ? (
         <>
           <FaRegUserCircle className="ml-4 text-white" size={20} />
-          <p className="ml-2 text-white">{userName.split('"')}</p>
+          <p className="ml-2 text-white">{userName}</p>
           <button
             type="button"
-            onClick={handleLogout}
+            onClick={logout}
             className="focus:outline-none ml-4 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
           >
             Logout

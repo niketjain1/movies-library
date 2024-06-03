@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CustomButton from "../button/CustomButton";
 import { toast } from "react-toastify";
+import { useAuth } from "@/app/context/AuthContext";
 
 interface ResponseData {
   token: string;
@@ -31,6 +32,7 @@ const SigninForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { setUserName } = useAuth();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -45,6 +47,7 @@ const SigninForm = () => {
       localStorage.setItem("userName", JSON.stringify(user.userName));
       localStorage.setItem("email", JSON.stringify(user.email));
       localStorage.setItem("userId", JSON.stringify(user.userId));
+      setUserName(user.userName);
       toast.success("User signed in successfully!", {
         position: "bottom-center",
       });
