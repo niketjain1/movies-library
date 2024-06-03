@@ -53,7 +53,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="flex h-screen w-full pt-11">
-      <div className="w-1/4 bg-gray-100 p-4 mt-4 max-h-screen overflow-auto">
+      <div className="w-1/4 bg-gray-100 p-4 mt-6 max-h-screen overflow-auto">
         <h1 className="text-3xl font-bold mb-4">Movie Lists</h1>
         <CreateMovieList onListCreated={handleListCreated} />
         <div className="mt-8">
