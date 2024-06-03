@@ -3,7 +3,7 @@
 import { searchMovies } from "@/lib/api";
 import React, { useState } from "react";
 import MovieCard from "../card/MovieCard";
-import { ToastContainer, toast } from "react-toastify"; 
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export type MovieResult = {
@@ -24,10 +24,19 @@ const SearchMovies: React.FC = () => {
 
   const handleSearch = async () => {
     try {
+      if (query.length === 0) {
+        toast.error("Search cannot be empty, please enter a movie name!", {
+          position: "bottom-center",
+        });
+        return;
+      }
       const data = await searchMovies(query);
       setMovie(data);
     } catch (error) {
       console.error("Error fetching movies:", error);
+      toast.error("Movie not found!", {
+        position: "bottom-center",
+      });
     }
   };
 
@@ -37,6 +46,11 @@ const SearchMovies: React.FC = () => {
     toast.success("Movie added to the list successfully!", {
       position: "bottom-center",
     });
+  };
+
+  const clearQuery = () => {
+    setMovie(null);
+    setQuery("");
   };
 
   return (
@@ -54,6 +68,12 @@ const SearchMovies: React.FC = () => {
           className="bg-blue-500 text-white p-2 rounded"
         >
           Search
+        </button>
+        <button
+          onClick={clearQuery}
+          className="bg-red-500 text-white p-2 rounded"
+        >
+          Clear
         </button>
       </div>
       <div className="mt-4">
