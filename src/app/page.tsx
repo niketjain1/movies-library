@@ -31,11 +31,27 @@ const Home: React.FC = () => {
     fetchLists();
   }, [router]);
 
+  const handleListCreated = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        router.push("/signin");
+        return;
+      }
+
+      const userId = parseInt(localStorage.getItem("userId") as string);
+      const data = await getMovieLists(userId, token);
+      setLists(data);
+    } catch (error) {
+      console.error("Error fetching movie lists after list creation:", error);
+    }
+  };
+
   return (
-    <div className="flex h-screen w-full pt-11 overflow-auto">
+    <div className="flex h-screen w-full pt-11">
       <div className="w-1/4 bg-gray-100 p-4 mt-4 max-h-screen overflow-auto">
         <h1 className="text-3xl font-bold mb-4">Movie Lists</h1>
-        <CreateMovieList />
+        <CreateMovieList onListCreated={handleListCreated} />
         <div className="mt-8">
           <h2 className="text-2xl font-bold">Your Lists</h2>
           <div className="mt-4">
@@ -52,7 +68,9 @@ const Home: React.FC = () => {
       </div>
 
       <div className="w-3/4 p-4">
-        <h1 className="text-3xl font-bold mb-4 pt-8">Search Movies</h1>
+        <h1 className="text-3xl font-bold mb-4 pt-8 max-h-screen overflow-auto">
+          Search Movies
+        </h1>
         <SearchMovies />
       </div>
     </div>

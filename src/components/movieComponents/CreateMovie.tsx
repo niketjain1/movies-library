@@ -5,8 +5,9 @@ import React, { useState } from "react";
 
 interface CreateMovieListType {
   className?: string;
+  onListCreated: () => void;
 }
-const CreateMovieList = ({ className }: CreateMovieListType) => {
+const CreateMovieList = ({ className, onListCreated }: CreateMovieListType) => {
   const [name, setName] = useState("");
   const [isPublic, setIsPublic] = useState(false);
 
@@ -17,6 +18,8 @@ const CreateMovieList = ({ className }: CreateMovieListType) => {
       const userId = parseInt(localStorage.getItem("user") as string);
       await createMovieList(name, isPublic, token, userId);
       setName("");
+      setIsPublic(false);
+      onListCreated();
     } catch (error) {
       console.error("Error creating movie list:", error);
     }
