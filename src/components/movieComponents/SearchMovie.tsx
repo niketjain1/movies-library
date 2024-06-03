@@ -3,8 +3,7 @@
 import { searchMovies } from "@/lib/api";
 import React, { useState } from "react";
 import MovieCard from "../card/MovieCard";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export type MovieResult = {
   director: string;

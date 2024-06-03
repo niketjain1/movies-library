@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { getMovieLists } from "../lib/api";
 import SearchMovies from "../components/movieComponents/SearchMovie";
 import CreateMovieList from "../components/movieComponents/CreateMovie";
-import MovieListCard from "@/components/card/MovieListCard";
+import ListCard from "@/components/card/ListCard";
+import { toast } from "react-toastify";
 
 const Home: React.FC = () => {
   const [lists, setLists] = useState<any[]>([]);
@@ -42,6 +43,9 @@ const Home: React.FC = () => {
       const userId = parseInt(localStorage.getItem("userId") as string);
       const data = await getMovieLists(userId, token);
       setLists(data);
+      toast.success("List added successfully!", {
+        position: "top-left",
+      });
     } catch (error) {
       console.error("Error fetching movie lists after list creation:", error);
     }
@@ -55,22 +59,26 @@ const Home: React.FC = () => {
         <div className="mt-8">
           <h2 className="text-2xl font-bold">Your Lists</h2>
           <div className="mt-4">
-            {lists.map((list) => (
-              <MovieListCard
-                key={list.id}
-                listTitle={list.name}
-                isPublic={list.isPublic ? "Public" : "Private"}
-                listId={list.id}
-              />
-            ))}
+            {lists.length > 0 ? (
+              lists.map((list) => (
+                <ListCard
+                  key={list.id}
+                  listTitle={list.name}
+                  isPublic={list.isPublic ? "Public" : "Private"}
+                  listId={list.id}
+                />
+              ))
+            ) : (
+              <p className="mt-10 items-center text-red-500">
+                No list found, create a list from the option above.
+              </p>
+            )}
           </div>
         </div>
       </div>
 
       <div className="w-3/4 p-4">
-        <h1 className="text-3xl font-bold mb-4 pt-8 max-h-screen overflow-auto">
-          Search Movies
-        </h1>
+        <h1 className="text-3xl font-bold mb-4 pt-8">Search Movies</h1>
         <SearchMovies />
       </div>
     </div>
