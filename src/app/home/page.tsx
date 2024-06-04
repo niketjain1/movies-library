@@ -12,6 +12,7 @@ const Home: React.FC = () => {
   const [lists, setLists] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [createMovieListLoading, setCreateMovieListLoading] = useState(false);
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -42,7 +43,7 @@ const Home: React.FC = () => {
         router.push("/signin");
         return;
       }
-
+      setCreateMovieListLoading(true);
       const userId = parseInt(localStorage.getItem("userId") as string);
       const data = await getMovieLists(userId, token);
       setLists(data);
@@ -51,6 +52,8 @@ const Home: React.FC = () => {
       });
     } catch (error) {
       console.error("Error fetching movie lists after list creation:", error);
+    } finally {
+      setCreateMovieListLoading(false);
     }
   };
 
@@ -58,7 +61,7 @@ const Home: React.FC = () => {
     <div className="flex h-screen w-full pt-11">
       <div className="w-1/4 bg-gray-100 p-4 mt-6 max-h-screen overflow-auto">
         <h1 className="text-3xl font-bold mb-4">Movie Lists</h1>
-        <CreateMovieList onListCreated={handleListCreated} />
+        <CreateMovieList onListCreated={handleListCreated} createListLoading={createMovieListLoading} />
         <div className="mt-8">
           <h2 className="text-2xl font-bold">Your Lists</h2>
           {loading ? (

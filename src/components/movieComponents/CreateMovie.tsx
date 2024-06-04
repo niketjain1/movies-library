@@ -6,8 +6,13 @@ import React, { useState } from "react";
 interface CreateMovieListType {
   className?: string;
   onListCreated: () => void;
+  createListLoading?: boolean;
 }
-const CreateMovieList = ({ className, onListCreated }: CreateMovieListType) => {
+const CreateMovieList = ({
+  className,
+  onListCreated,
+  createListLoading,
+}: CreateMovieListType) => {
   const [name, setName] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const [loading, setIsLoading] = useState(false);
@@ -50,7 +55,7 @@ const CreateMovieList = ({ className, onListCreated }: CreateMovieListType) => {
         />
         <label>Public</label>
       </div>
-      {loading ? (
+      {loading || createListLoading ? (
         <div className="flex justify-center items-center">
           <div className="loader" />
         </div>
