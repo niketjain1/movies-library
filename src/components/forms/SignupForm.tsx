@@ -26,10 +26,12 @@ const SignupForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await register(username, email, password);
       router.push("/signin");
       toast.success("User registered successfully!", {
@@ -37,6 +39,8 @@ const SignupForm = () => {
       });
     } catch (err) {
       setError("Failed to create account");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -85,7 +89,13 @@ const SignupForm = () => {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <CustomButton title={"Sign Up"} />
+            {loading ? (
+              <div className="flex items-center justify-center">
+                <div className="loader" />
+              </div>
+            ) : (
+              <CustomButton title={"Sign Up"} />
+            )}
           </CardFooter>
         </Card>
         <div className="mt-4 text-center text-sm">

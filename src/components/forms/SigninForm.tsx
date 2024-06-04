@@ -33,10 +33,12 @@ const SigninForm = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const { setUserName } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const data: ResponseData = await login(email, password);
       localStorage.setItem("token", data.token);
       const user = {
@@ -54,6 +56,8 @@ const SigninForm = () => {
       router.push("/home");
     } catch (err) {
       setError("Invalid email or password");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,7 +95,13 @@ const SigninForm = () => {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <CustomButton title={"Sign In"} />
+            {loading ? (
+              <div className="flex items-center justify-center">
+                <div className="loader" />
+              </div>
+            ) : (
+              <CustomButton title={"Sign In"} />
+            )}
           </CardFooter>
         </Card>
         <div className="mt-4 text-center text-sm">
