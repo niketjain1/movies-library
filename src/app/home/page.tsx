@@ -10,6 +10,7 @@ import SearchMovies from "@/components/movieComponents/SearchMovie";
 
 const Home: React.FC = () => {
   const [lists, setLists] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -20,12 +21,14 @@ const Home: React.FC = () => {
           router.push("/signin");
           return;
         }
-
+        setLoading(true);
         const userId = parseInt(localStorage.getItem("userId") as string);
         const data = await getMovieLists(userId, token);
         setLists(data);
       } catch (error) {
         console.error("Error fetching movie lists:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -58,22 +61,28 @@ const Home: React.FC = () => {
         <CreateMovieList onListCreated={handleListCreated} />
         <div className="mt-8">
           <h2 className="text-2xl font-bold">Your Lists</h2>
-          <div className="mt-4">
-            {lists.length > 0 ? (
-              lists.map((list) => (
-                <ListCard
-                  key={list.id}
-                  listTitle={list.name}
-                  isPublic={list.isPublic ? "Public" : "Private"}
-                  listId={list.id}
-                />
-              ))
-            ) : (
-              <p className="mt-10 items-center text-red-500">
-                No list found, create a list from the option above.
-              </p>
-            )}
-          </div>
+          {loading ? (
+            <div className="flex mt-36 items-center justify-center">
+              <div className="loader" />
+            </div>
+          ) : (
+            <div className="mt-4">
+              {lists.length > 0 ? (
+                lists.map((list) => (
+                  <ListCard
+                    key={list.id}
+                    listTitle={list.name}
+                    isPublic={list.isPublic ? "Public" : "Private"}
+                    listId={list.id}
+                  />
+                ))
+              ) : (
+                <p className="mt-10 items-center text-red-500">
+                  No list found, create a list from the option above.
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
