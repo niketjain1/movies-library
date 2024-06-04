@@ -16,7 +16,10 @@ const NavBar = () => {
       <RiMovie2Line size={24} className="text-white" />
       <p className="mx-3 text-white">Movies library</p>
       <Link href={"/home"} className="ml-auto">
-        <CustomButton title={"Home"} />
+        <CustomButton
+          isDisabled={!isAuthenticated ? true : false}
+          title={"Home"}
+        />
       </Link>
       {isAuthenticated ? (
         <>
