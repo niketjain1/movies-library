@@ -11,6 +11,7 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
   const [listTitle, setListTitle] = useState("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
   const [isClient, setIsClient] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchListDetailsData = async () => {
     try {
@@ -20,6 +21,8 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
       setIsPublic(list.isPublic);
     } catch (error) {
       console.error("Failed to fetch list details:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -36,6 +39,14 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
     return !!token;
   };
 
+  if (loading) {
+    return (
+      <div className="flex w-screen justify-center items-center h-screen">
+        <div className="loader"></div> {/* Use your loader class here */}
+      </div>
+    );
+  }
+
   if (!isPublic && isClient && !isUserLoggedIn()) {
     return (
       <div className="flex w-screen justify-center items-center h-screen">
@@ -44,7 +55,7 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
     );
   }
 
-  if (movies.length == 0) {
+  if (movies.length == 0 && !loading) {
     return (
       <div className="flex w-screen justify-center items-center h-screen">
         <p className="text-2xl font-bold text-white">No movies in this list</p>
