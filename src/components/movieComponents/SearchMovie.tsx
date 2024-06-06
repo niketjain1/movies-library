@@ -85,6 +85,10 @@ const SearchMovies: React.FC = () => {
           Clear
         </button>
       </div>
+      <div className="mt-1 text-white italic">
+        Note: The search is case-sensitive. Please enter the movie name with
+        exact words and correct casing.
+      </div>
       <div className="mt-4">
         {movie != null && (
           <MovieCard

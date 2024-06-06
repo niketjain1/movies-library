@@ -33,7 +33,7 @@ const MovieCard = ({
           <p className="mb-1 text-sm text-gray-700">Release year: {year}</p>
           <p className="mb-1 text-sm text-gray-700">Director: {director}</p>
           <p className="mb-1 text-sm text-gray-700">Rating: {rating}</p>
-          {/* <p className="mb-1 text-sm text-gray-700">Plot: {plot}</p> */}
+          <p className="mb-1 text-sm text-gray-700">Plot: {plot}</p>
           {!disableAddToList && (
             <AddMovieToList imdbID={imdbId ?? ""} onSuccess={onSucces as any} />
           )}
