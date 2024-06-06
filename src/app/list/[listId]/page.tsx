@@ -13,25 +13,25 @@ const ListDetail = ({ params }: { params: { listId: string } }) => {
   const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const fetchListDetailsData = async () => {
-    try {
-      const list = await fetchListDetails(parseInt(listId));
-      setMovies(list.movies);
-      setListTitle(list.name);
-      setIsPublic(list.isPublic);
-    } catch (error) {
-      console.error("Failed to fetch list details:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchListDetailsData = async () => {
+      try {
+        const list = await fetchListDetails(parseInt(listId));
+        setMovies(list.movies);
+        setListTitle(list.name);
+        setIsPublic(list.isPublic);
+      } catch (error) {
+        console.error("Failed to fetch list details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     setIsClient(true);
     if (listId) {
       fetchListDetailsData();
     }
-  }, [listId, fetchListDetailsData()]);
+  }, [listId]);
 
   const isUserLoggedIn = () => {
     if (typeof window === "undefined") return false;
