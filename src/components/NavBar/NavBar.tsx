@@ -24,7 +24,7 @@ const NavBar = () => {
       {isAuthenticated ? (
         <>
           <FaRegUserCircle className="ml-4 text-white" size={20} />
-          <p className="ml-2 text-white">{userName}</p>
+          <p className="ml-2 text-white">{userName?.split('"')}</p>
           <button
             type="button"
             onClick={logout}
